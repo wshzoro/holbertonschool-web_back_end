@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-import math
+"""This module define a function to floor a float numbers.
+"""
+
 
 def floor(n: float) -> int:
-    """returns the floor of a float as an int"""
-    return math.floor(n)
+    """Returns the floor of a float as an int.
+    """
+    return int(n)
