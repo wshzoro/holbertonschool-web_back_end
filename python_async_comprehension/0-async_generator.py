@@ -10,7 +10,8 @@ from typing import AsyncGenerator
 
 async def async_generator() -> AsyncGenerator[float, None]:
     """
-    Coroutine that loops 10 times, each time asynchronously waits 1 second,
+    Coroutine that loops 10 times, each time
+    asynchronously waits 1 second,
     then yields a random number between 0 and 10.
     """
     for _ in range(10):
