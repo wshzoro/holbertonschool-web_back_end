@@ -4,14 +4,11 @@ function named index_range that takes
 two int args page and page_size
 """
 
-from typing import Tuple
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
+def index_range(page: int, page_size: int) -> tuple:
     """
     return a tuple of size two containing
     a start index and an end index
     """
 
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return (start_index, end_index)
+    return ((page - 1) * page_size, page * page_size)
+
