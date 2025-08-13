@@ -54,4 +54,3 @@ class Server:
             new_page = all_of_data[i]
             Page_list.append(new_page)
         return Page_list
-    
