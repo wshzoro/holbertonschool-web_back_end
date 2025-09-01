@@ -8,7 +8,7 @@ function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 
-  const lines = data.split('\n').filter(line => line.trim() !== '');
+  const lines = data.split('\n');
   const students = lines.slice(1).filter(line => line.trim() !== '');
 
   console.log(`Number of students: ${students.length}`);
@@ -23,11 +23,17 @@ function countStudents(path) {
     fields[field].push(firstname);
   });
 
-  // Ordre d'apparition exact
-  const fieldOrder = [...new Set(students.map(line => line.split(',').pop().trim()))];
+  // Afficher les champs dans l'ordre exact d'apparition dans le CSV
+  const fieldOrder = [];
+  students.forEach(line => {
+    const field = line.split(',').pop().trim();
+    if (!fieldOrder.includes(field)) fieldOrder.push(field);
+  });
+
   fieldOrder.forEach(field => {
-    const list = fields[field];
-    console.log(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
+    console.log(
+      `Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`
+    );
   });
 }
 
