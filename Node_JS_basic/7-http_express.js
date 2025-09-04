@@ -1,26 +1,33 @@
-const express = require('express');
-const countStudents = require('./3-read_file_async');
+import express from 'express';
+import countStudents from './3-read_file_async.js';
 
 const database = process.argv[2];
-
 const app = express();
 
-app.get('/students', async (req, res) => {
-  res.type('text/plain');
-  let output = 'This is the list of our students\n';
-  try {
-    const originalLog = console.log;
-    let logOutput = '';
-    console.log = (msg) => { logOutput += `${msg}\n`; };
-    await countStudents(database);
-    console.log = originalLog;
-    output += logOutput.trim();
-    res.send(output);
-  } catch (err) {
-    res.send(err.toString());
-  }
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
+});
+
+app.get('/students', (req, res) => {
+  let output = '';
+  const originalConsoleLog = console.log;
+  console.log = (msg) => { output += `${msg}\n`; };
+
+  countStudents(database)
+    .then(() => {
+      console.log = originalConsoleLog;
+      res.status(200).send(`This is the list of our students\n${output}`);
+    })
+    .catch(() => {
+      console.log = originalConsoleLog;
+      res.status(200).send('This is the list of our students\nCannot load the database');
+    });
+});
+
+app.use((req, res) => {
+  res.status(404).send('Not Found');
 });
 
 app.listen(1245);
 
-module.exports = app;
+export default app;
