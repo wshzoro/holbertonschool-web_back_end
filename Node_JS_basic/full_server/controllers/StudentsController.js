@@ -5,7 +5,7 @@ export default class StudentsController {
     try {
       const database = process.argv[2];
       const fields = await readDatabase(database);
-      let output = 'This is the list of our Students\n';
+      let output = 'This is the list of our students\n';
       const sortedFields = Object.keys(fields).sort(
         (a, b) => a.toLowerCase().localeCompare(b.toLowerCase()),
       );
