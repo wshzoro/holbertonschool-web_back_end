@@ -18,8 +18,9 @@ const app = http.createServer((req, res) => {
         console.log = originalConsoleLog;
         res.end(`This is the list of our students\n${output}`);
       })
-      .catch((err) => {
-        res.end(err.toString());
+      .catch(() => {
+        console.log = originalConsoleLog;
+        res.end('This is the list of our students\nCannot load the database');
       });
   } else {
     res.statusCode = 404;
